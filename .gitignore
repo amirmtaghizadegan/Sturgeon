@@ -1,4 +1,10 @@
-./pics
+/pics
 stats.xlsx
 dups.xlsx
-*.zip
+.zip
+
+.DSB_Store
+Thumbs.db
+
+
+
