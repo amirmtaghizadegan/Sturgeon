@@ -49,28 +49,42 @@ for k = 1:length(tissues)
         data_temp = data{string(data.Analyte)==element_ref(i, 2) & string(data.Units) == 'mg/kg wwt', contains(string(data_vn), tissues(1, k))};
         lt_id = (lt_track(string(data.Analyte)==element_ref(i, 2) & string(data.Units) == 'mg/kg wwt', contains(string(data_vn), tissues(1, k))));
         lt_id = lt_id(~isnan(data_temp));
-        data_temp = data_temp(~isnan(data_temp));
 
+        data_temp = data_temp(~isnan(data_temp));
+        data_healthy = data_temp(end);
+        data_temp = data_temp(1:end-1);
         x = 1:length(data_temp);
+
         b = bar(x, data_temp, 'DisplayName', 'Data');
         % data bar settings
         title(tissues(1, k) + " " + element_ref(i, 2))
         b.FaceColor = [0 0 1]; % bar colors
         xticknames = string(number_extractor(string(data_vn(contains(string(data_vn), tissues(1, k))))));
-        xticklabels(xticknames)
         xlabel("fish sample")
         ylabel("mg/kg wwt")
         
         hold on
         % ploting star over <dl bars.
         plot(x(lt_id), data_temp(lt_id), '*r', 'DisplayName', '<DL', 'MarkerSize', 12)
-        
+
+        % ploting healthy fish
+        bar(x(end) + 2, data_healthy, "DisplayName", "healthy", "FaceColor", [0.2, .9, .4]);
+        xticks = 1:x(end)+2;
+        xticknames = [xticknames(1:end-1) "" "13"];
+
         % ref bar
         ref_temp = ref.(element_ref(i, 1))(ref.Tissue == tissues(2, k));
+        temp_name = ref.Fish(ref.Tissue == tissues(2, k))';
+        temp_name = temp_name(~isnan(ref_temp));
         ref_temp = ref_temp(~isnan(ref_temp));
+
         xx = 1:length(ref_temp);
-        xx = xx+2+x(end);
+        xx = xx+1+xticks(end);
         bb = bar(xx, ref_temp, 'DisplayName', 'Refrence');
+        
+        
+        xticks = 1:(xx(end));
+        xticknames = [xticknames strings(1, 1) temp_name];
         
         % ref bar settings
         bb.FaceColor = [1 0 0]; %ref bar colors
@@ -86,7 +100,8 @@ for k = 1:length(tissues)
         if ~isnan(standard_ref(i)) && k == 1
             plot(fx, [standard_ref(i) standard_ref(i)], '--k', DisplayName="Standards", LineWidth=2)
         end
-
+        
+        set(gca, "XTick", xticks, "XTickLabel", xticknames)
         legend()
     end
 end
