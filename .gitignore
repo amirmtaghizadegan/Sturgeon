@@ -3,6 +3,7 @@ stats.xlsx
 dups.xlsx
 *.zip
 
+~$*.xlsx
 .DS_Store
 Thumbs.db
 
