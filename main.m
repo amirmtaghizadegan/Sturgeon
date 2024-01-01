@@ -5,9 +5,9 @@ clc
 
 %% elements refrence
 element_ref = ["As", "Arsenic"; "Cd", "Cadmium"; "Cr", "Chromium";
-    "Cu", "Copper"; "Hg", "Mercury"; "Zn", "Zinc"]; % "Ag", "Silver";
+    "Cu", "Copper"; "Hg", "Mercury"; "Zn", "Zinc";"Na", "Sodium"]; % "Ag", "Silver";
 
-standard_ref = [3 0.5 NaN NaN 1 NaN]; %from paper... 
+standard_ref = [3 0.5 NaN NaN 1 NaN NaN]; %from paper... 
 
 %% making refrence table
 ref = readtable("etwas.xlsx");
@@ -82,9 +82,10 @@ for k = 1:length(tissues)
         xx = xx+1+xticks(end);
         bb = bar(xx, ref_temp, 'DisplayName', 'Refrence');
         
-        
-        xticks = 1:(xx(end));
-        xticknames = [xticknames strings(1, 1) temp_name];
+        if xx
+            xticks = 1:(xx(end));
+            xticknames = [xticknames strings(1, 1) temp_name];
+        end
         
         % ref bar settings
         bb.FaceColor = [1 0 0]; %ref bar colors
