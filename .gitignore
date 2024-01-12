@@ -3,7 +3,7 @@
 stats.xlsx
 dups.xlsx
 *.zip
-*.fig
+fig.jpeg
 
 ~$*.xlsx
 .DS_Store
