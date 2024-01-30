@@ -3,11 +3,11 @@
 stats.xlsx
 dups.xlsx
 *.zip
-fig.jpeg
+*.jpeg
 
 ~$*.xlsx
 .DS_Store
 Thumbs.db
 
 
-
+Hatcheri.xlsx
