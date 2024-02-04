@@ -4,6 +4,7 @@ stats.xlsx
 dups.xlsx
 *.zip
 *.jpeg
+pcb_stats.xlsx
 
 ~$*.xlsx
 .DS_Store
