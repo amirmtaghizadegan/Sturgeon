@@ -5,10 +5,7 @@ dups.xlsx
 *.zip
 *.jpeg
 pcb_stats.xlsx
-
+Hatcheri.xlsx
 ~$*.xlsx
 .DS_Store
 Thumbs.db
-
-
-Hatcheri.xlsx
