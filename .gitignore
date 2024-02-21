@@ -3,9 +3,10 @@
 stats.xlsx
 dups.xlsx
 *.zip
-*.jpeg
+**/*.jpeg
 pcb_stats.xlsx
 Hatcheri.xlsx
 ~$*.xlsx
 .DS_Store
 Thumbs.db
+
