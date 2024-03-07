@@ -1,9 +1,10 @@
 # Setting work space files and loading libraries
 
 ```{r}
-# install.packages("ggplot2")
-# install.packages("readxl")
-# install.packages("latex2exp")
+install.packages("ggplot2")
+install.packages("readxl")
+install.packages("latex2exp")
+
 library("ggplot2")
 library(readxl)
 library(latex2exp)
@@ -18,7 +19,7 @@ muscle
 ```{r}
 df = read_xlsx("./HVB_Se.xlsx")
 df$tag = factor(as.character(df$tag))
-ggplot(data = df[df$tissue == "Muscle",], mapping = aes(x=tag, y = HVB_Se))+geom_bar(fill="gray", color="black", stat="identity") + coord_flip()+xlab("tag")+ylab(expression(HVB[Se]))+scale_x_discrete(limits=df$tag[df$tissue=="Muscle"])
+ggplot(data = df[df$tissue == "Muscle",], mapping = aes(x=tag, y = HVB_Se))+geom_bar(fill="gray", color="black", stat="identity") + coord_flip()+xlab("fish_ID")+ylab(expression(HVB[Se]))+scale_x_discrete(limits=df$tag[df$tissue=="Muscle"])
 ```
 
 Liver
@@ -30,5 +31,5 @@ ggplot(data = df[df$tissue == "Liver",], mapping = aes(x=tag, y = HVB_Se))+geom_
 ```{r}
 df$tag = factor(as.character(df$tag))
 df = rbind(df, data.frame(tissue = "Liver", tag=3, HVB_Se = NA))
-ggplot(data = df, mapping = aes(x=tag, y = HVB_Se, fill = tissue))+geom_bar(stat="identity", position = position_dodge()) + coord_flip()+xlab("tag")+ylab(expression(HVB[Se]))+scale_x_discrete(limits=df$tag[df$tissue=="Muscle"])
+ggplot(data = df, mapping = aes(x=tag, y = HVB_Se, fill = tissue))+geom_bar(stat="identity", position = position_dodge()) + coord_flip()+xlab("Fish ID ")+ylab(expression(HVB[Se]))+scale_x_discrete(limits=df$tag[df$tissue=="Muscle"])
 ```
