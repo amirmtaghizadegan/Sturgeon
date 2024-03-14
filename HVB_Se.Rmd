@@ -1,9 +1,9 @@
 # Setting work space files and loading libraries
 
 ```{r}
-install.packages("ggplot2")
-install.packages("readxl")
-install.packages("latex2exp")
+#install.packages("ggplot2")
+#install.packages("readxl")
+#install.packages("latex2exp")
 
 library("ggplot2")
 library(readxl)
@@ -32,4 +32,37 @@ ggplot(data = df[df$tissue == "Liver",], mapping = aes(x=tag, y = HVB_Se))+geom_
 df$tag = factor(as.character(df$tag))
 df = rbind(df, data.frame(tissue = "Liver", tag=3, HVB_Se = NA))
 ggplot(data = df, mapping = aes(x=tag, y = HVB_Se, fill = tissue))+geom_bar(stat="identity", position = position_dodge()) + coord_flip()+xlab("Fish ID ")+ylab(expression(HVB[Se]))+scale_x_discrete(limits=df$tag[df$tissue=="Muscle"])
+
+```
+
+
+```{r}
+
+# Convert tag to factor
+df$tag <- factor(as.character(df$tag))
+
+# Create a new row for Liver tissue
+new_row <- data.frame(tissue = "Liver", tag = 3, HVB_Se = NA)
+
+# Bind the new row to the dataframe
+df <- rbind(df, new_row)
+
+# Define colors for the bars
+bar_colors <- c("Muscle" = "coral", "Liver" = "azure4")
+
+# Create the plot
+ggplot(data = df, aes(x = tag, y = HVB_Se, fill = tissue)) +
+  geom_bar(stat = "identity", position = position_dodge()) +
+  scale_fill_manual(values = bar_colors) +  # Specify the colors
+  coord_flip() +
+  xlab("Fish ID") +
+  ylab(expression(HVB[Se])) +
+  scale_x_discrete(limits = df$tag[df$tissue == "Muscle"]) +
+  theme(axis.title.x = element_text(size = 20, face = "bold"),  # Make x-axis title bold
+        axis.title.y = element_text(size = 20,face = "bold"),  # Make y-axis title bold
+        axis.text.x = element_text(size = 15),  # Make x-axis numbers bigger
+        axis.text.y = element_text(size = 15), # Make y-axis numbers bigger
+        legend.key.size = unit(1.5, "lines"),
+        legend.text = element_text(size = 12),
+        legend.title = element_text(size = 15, face = "bold"))# Adjust legend key size
 ```

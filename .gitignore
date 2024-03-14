@@ -10,3 +10,5 @@ Hatcheri.xlsx
 .DS_Store
 Thumbs.db
 
+.RData
+.Rhistory
