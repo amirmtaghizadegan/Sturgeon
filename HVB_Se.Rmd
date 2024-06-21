@@ -4,10 +4,14 @@
 #install.packages("ggplot2")
 #install.packages("readxl")
 #install.packages("latex2exp")
+#install.packages("dplyr")
+#install.packages("tidyr")
 
 library("ggplot2")
 library(readxl)
 library(latex2exp)
+library(dplyr)
+library(tidyr)
 ```
 
 # Plotting HVB_Se
@@ -29,6 +33,11 @@ ggplot(data = df[df$tissue == "Liver",], mapping = aes(x=tag, y = HVB_Se))+geom_
 ```
 
 ```{r}
+ggplot(data = df[df$tissue == "Punch",], mapping = aes(x=tag, y = HVB_Se))+geom_bar(stat="identity", fill="gray", color="black") + coord_flip()+xlab("tag")+ylab(expression(HVB[Se]))+scale_x_discrete(limits=df$tag[df$tissue=="Liver"])
+```
+
+
+```{r}
 df$tag = factor(as.character(df$tag))
 df = rbind(df, data.frame(tissue = "Liver", tag=3, HVB_Se = NA))
 ggplot(data = df, mapping = aes(x=tag, y = HVB_Se, fill = tissue))+geom_bar(stat="identity", position = position_dodge()) + coord_flip()+xlab("Fish ID ")+ylab(expression(HVB[Se]))+scale_x_discrete(limits=df$tag[df$tissue=="Muscle"])
@@ -48,7 +57,7 @@ new_row <- data.frame(tissue = "Liver", tag = 3, HVB_Se = NA)
 df <- rbind(df, new_row)
 
 # Define colors for the bars
-bar_colors <- c("Muscle" = "coral", "Liver" = "azure4")
+bar_colors <- c("Muscle" = "coral", "Liver" = "azure4", "Punch" = "Blue")
 
 # Create the plot
 ggplot(data = df, aes(x = tag, y = HVB_Se, fill = tissue)) +
@@ -66,3 +75,9 @@ ggplot(data = df, aes(x = tag, y = HVB_Se, fill = tissue)) +
         legend.text = element_text(size = 12),
         legend.title = element_text(size = 15, face = "bold"))# Adjust legend key size
 ```
+
+
+
+
+
+
