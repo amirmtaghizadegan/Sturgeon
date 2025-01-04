@@ -9,6 +9,7 @@ Hatcheri.xlsx
 ~$*.xlsx
 .DS_Store
 Thumbs.db
-
+*.xlsx
+*.xls
 .RData
 .Rhistory
